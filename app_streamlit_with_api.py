@@ -31,8 +31,8 @@ def send_message():
 
         # Afficher le message et la réponse dans le conteneur de discussion
         with chat_container:
-            st.write(f'Vous : {message}')
-            st.write(f'''Réponse : Le sentiment de cette phrase est __{sentiment}__''')
+            st.write(f'__Vous__ : {message}')
+            st.write(f'''__Réponse__ : Le sentiment de cette phrase est __{sentiment}__''')
         # Réinitialiser le champ de saisie
         st.session_state.new_message = ""
 

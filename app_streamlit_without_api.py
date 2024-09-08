@@ -1,7 +1,5 @@
 import streamlit as st
-from gensim.models import Word2Vec
-import re
-import nltk
+
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer

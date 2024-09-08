@@ -1,13 +1,9 @@
 from flask import Flask, request, jsonify
-import pickle
-from gensim.models import Word2Vec
-import re
-import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 import numpy as np
-import pickle
+import joblib
 
 
 app = Flask(__name__)
@@ -31,16 +27,15 @@ def vectorize_text(text, model):
 
 
 def charger_modele():
-    # Charger le modèle à partir du fichier Pickle
-    with open('modele.pkl', 'rb') as fichier_modele:
-        modele = pickle.load(fichier_modele)
+    # Charger le modèle du vecteur word2vec avec joblib
+    modele = joblib.load('modele_word2vec.joblib')
     return modele
 
 
 def charger_svc():
-    # Charger le modèle à partir du fichier Pickle
-    with open('svc_classifer.pkl', 'rb') as fichier_modele:
-        svc = pickle.load(fichier_modele)
+    # Charger le modèle svc avec joblib
+    svc = joblib.load('svc_model.joblib')
+    #svc = joblib.load('sgdc_rl_model.joblib')
     return svc
 
 @app.route('/predict', methods=['POST'])
