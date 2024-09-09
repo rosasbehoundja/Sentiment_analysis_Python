@@ -8,38 +8,46 @@ We've tried differents approaches. First we use TfidfVectorizer with sklearn lib
 You can test our work in the following link :)) 👉🏾
 
 ## Testing in local
-  1- Create a new Folder and open your Code editor.
+  1. Create a new Folder and open your Code editor.
   
-  2- Create your virtual environment:
-    * Windows 
+  2. Create your virtual environment:
+  
+    _ Windows 
+    
       ```
       python -m venv mon_env
       .\mon_env\Scripts\activate
       ```
-    * Linux 
+      
+    _ Linux 
+    
       ```
       python3 -m venv mon_env
       source mon_env/bin/activate
       ```
       
-  3- Clone the reposit :
+  3. Clone the reposit :
+
     ``` 
     (mon_env) git clone https://github.com/rosasbehoundja/Sentiment_analysis_Python.git
     ```
     
-  4- Move into the main directory : 
+  4. Move into the main directory : 
+  
     ```
     (mon_env) cd PIL1_2324_2
     ```
     
-  5- Install all the dependencies : 
+  5. Install all the dependencies : 
+  
     ```
     (mon_env) pip install -r requirements.txt*
     ```
     
-  6- Then you can work with our notebooks or make changes.
+  6. Then you can work with our notebooks or make changes.
   
-  7 - If you want to test the streamlit app in local, do : 
+  7. If you want to test the streamlit app in local, do : 
+  
     ```
     (mon_env)  cd  '.\Without API\'
     (mon_env) streamlit run .\app_streamlit_without_api.py
