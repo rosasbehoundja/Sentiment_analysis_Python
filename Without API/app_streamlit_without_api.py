@@ -1,10 +1,9 @@
 import streamlit as st
-
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 import numpy as np
-import pickle
+import joblib
 
 
 # Conteneur pour le titre et le champ de texte
@@ -29,18 +28,19 @@ def vectorize_text(text, model):
         return np.zeros(model.vector_size)
     
 
+
 def charger_modele():
-    # Charger le modèle à partir du fichier Pickle
-    with open('modele.pkl', 'rb') as fichier_modele:
-        modele = pickle.load(fichier_modele)
+    # Charger le modèle du vecteur word2vec avec joblib
+    modele = joblib.load('../Models/modele_word2vec.joblib')
     return modele
 
 
 def charger_svc():
-    # Charger le modèle à partir du fichier Pickle
-    with open('svc_classifer.pkl', 'rb') as fichier_modele:
-        svc = pickle.load(fichier_modele)
+    # Charger le modèle svc avec joblib
+    svc = joblib.load('../Models/svc_model.joblib')
+    #svc = joblib.load('../Models/sgdc_rl_model.joblib')
     return svc
+
     
 # Affichage du titre dans le conteneur
 with title_container:
@@ -61,23 +61,19 @@ def send_message():
         sentence_vector = vectorize_text(preprocessed_sentence, charger_modele())
 
         # Étape 3 : Prédire le label avec les modèles entraînés
-        predicted_label_rf = charger_svc().predict([sentence_vector])
-        
-        if predicted_label_rf == 0:
-            predicted_label_rf = 'Triste'
-        elif predicted_label_rf == 1 :
-            predicted_label_rf = 'Joie'
-        elif predicted_label_rf == 3:
-            predicted_label_rf = 'Confus'
-        else :
-            predicted_label_rf = 'Surpris'
+        predicted_label_rf = charger_svc().predict([sentence_vector])[0]
+
+        # Générer une réponse
+        label = {0: 'Triste', 1: 'Joie', 3: 'Colère', 4: 'Peur'}
+        sentiment = label[predicted_label_rf]
+
         # Générer une réponse (ici, on génère une réponse simple)
         # prediction = '...'
-        response = f"Le sentiment de cette phrase est {predicted_label_rf}"
+        response = f"Le sentiment de cette phrase est __{sentiment}__"
         # Afficher le message et la réponse dans le conteneur de discussion
         with chat_container:
-            st.write(f''' Vous : {message}''')
-            st.write(f"Réponse : {response}")
+            st.write(f''' __Vous__ : {message}''')
+            st.write(f"__Réponse__ : {response}")
         # Réinitialiser le champ de saisie
         st.session_state.new_message = ""
 

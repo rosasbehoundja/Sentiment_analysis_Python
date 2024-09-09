@@ -28,14 +28,14 @@ def vectorize_text(text, model):
 
 def charger_modele():
     # Charger le modèle du vecteur word2vec avec joblib
-    modele = joblib.load('modele_word2vec.joblib')
+    modele = joblib.load('../Models/modele_word2vec.joblib')
     return modele
 
 
 def charger_svc():
     # Charger le modèle svc avec joblib
-    svc = joblib.load('svc_model.joblib')
-    #svc = joblib.load('sgdc_rl_model.joblib')
+    svc = joblib.load('../Models/svc_model.joblib')
+    #svc = joblib.load('../Models/sgdc_rl_model.joblib')
     return svc
 
 @app.route('/predict', methods=['POST'])
